@@ -6,30 +6,30 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 
 @Controller()
 export class DistrictTalukaController {
-    constructor(private readonly districtTalukaService: DistrictTalukaService) { }
+  constructor(private readonly districtTalukaService: DistrictTalukaService) {}
 
-    @MessagePattern('getDistrictList')
-    async getDistrictList() {
-        return this.districtTalukaService.findAll();
-    }
+  @MessagePattern('createDistrict')
+  createDistrict(@Payload() createDistrictDto: CreateDistrictDto) {
+    return this.districtTalukaService.createDistrict(createDistrictDto);
+  }
 
-    @MessagePattern('createDistrict')
-    async createDistrict(@Payload() createDistrictDto: CreateDistrictDto) {
-        return this.districtTalukaService.create(createDistrictDto);
-    }
+  @MessagePattern('getAllDistricts')
+  getAllDistricts() {
+    return this.districtTalukaService.getAllDistricts();
+  }
 
-    @MessagePattern('updateDistrict')
-    async updateDistrict(@Payload() { id, ...updateDistrictDto }: { id: string } & UpdateDistrictDto) {
-        return this.districtTalukaService.update(id, updateDistrictDto);
-    }
+  @MessagePattern('getDistrictById')
+  getDistrictById(@Payload() { districtId }: { districtId: string }) {
+    return this.districtTalukaService.getDistrictById(districtId);
+  }
 
-    @MessagePattern('deleteDistrict')
-    async deleteDistrict(@Payload() { id }: { id: string }) {
-        return this.districtTalukaService.remove(id);
-    }
+  @MessagePattern('updateDistrict')
+  updateDistrict(@Payload() { districtId, updateDistrictDto }: { districtId: string; updateDistrictDto: UpdateDistrictDto }) {
+    return this.districtTalukaService.updateDistrict(districtId, updateDistrictDto);
+  }
 
-    @MessagePattern('getDistrictById')
-    async getDistrictById(@Payload() { id }: { id: string }) {
-        return this.districtTalukaService.findOne(id);
-    }
+  @MessagePattern('deleteDistrict')
+  deleteDistrict(@Payload() { districtId }: { districtId: string }) {
+    return this.districtTalukaService.deleteDistrict(districtId);
+  }
 }

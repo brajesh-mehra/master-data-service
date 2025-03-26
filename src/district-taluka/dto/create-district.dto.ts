@@ -1,20 +1,25 @@
-import { IsString, IsNotEmpty, IsArray, ValidateNested, IsDefined } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsString, IsBoolean, IsArray, ValidateNested, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
-import { AddTalukaDto } from './add-taluka.dto';
+
+class TalukaDto {
+    @IsDefined({ message: 'Taluka name is required' })
+    @IsNotEmpty({ message: 'Taluka name cannot be empty' })
+    @IsString({ message: 'Taluka name must be a valid string' })
+    name: string;
+}
 
 export class CreateDistrictDto {
     @IsDefined({ message: 'District name is required' })
     @IsNotEmpty({ message: 'District name cannot be empty' })
     @IsString({ message: 'District name must be a valid string' })
-    districtName: string;
+    name: string;
 
-    @IsDefined({ message: 'District code is required' })
-    @IsNotEmpty({ message: 'District code cannot be empty' })
-    @IsString({ message: 'District code must be a valid string' })
-    districtCode: string;
+    @IsOptional()
+    @IsBoolean()
+    isActive?: boolean;
 
     @IsArray()
     @ValidateNested({ each: true })
-    @Type(() => AddTalukaDto)
-    talukas: AddTalukaDto[];
+    @Type(() => TalukaDto)
+    talukas: TalukaDto[];
 }

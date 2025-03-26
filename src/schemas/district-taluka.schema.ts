@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema({ timestamps: true })
+@Schema()
 export class Taluka {
   @Prop({ required: true })
   name: string;
@@ -9,11 +9,30 @@ export class Taluka {
 
 @Schema({ timestamps: true })
 export class District extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   name: string;
+
+  @Prop({ default: true })
+  isActive: boolean;
+
+  @Prop({ default: false })
+  isDeleted: boolean;
 
   @Prop({ type: [{ name: String }], default: [] })
   talukas: Taluka[];
 }
 
-export const DistrictSchema = SchemaFactory.createForClass(District);
+const DistrictSchema = SchemaFactory.createForClass(District);
+
+DistrictSchema.set('toJSON', {
+  transform: function (doc, ret) {
+      delete ret.isActive;
+      delete ret.isDeleted;
+      delete ret.createdAt;
+      delete ret.updatedAt;
+      delete ret.__v;
+      return ret;
+  }
+});
+
+export { DistrictSchema };
