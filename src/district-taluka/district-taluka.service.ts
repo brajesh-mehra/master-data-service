@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { District } from '../schemas/district-taluka.schema';
@@ -28,6 +28,9 @@ export class DistrictTalukaService {
   }
 
   async updateDistrict(districtId: string, updateDistrictDto: UpdateDistrictDto): Promise<District | null> {
+    if (!updateDistrictDto) {
+      throw new BadRequestException('Update data is required');
+    }
     return this.districtModel.findByIdAndUpdate(districtId, updateDistrictDto, { new: true }).exec();
   }
 
