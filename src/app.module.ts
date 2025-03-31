@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import configuration from './config/configuration';
 import { ManageCpModule } from './manage-cp/manage-cp.module';
 import { DistrictTalukaModule } from './district-taluka/district-taluka.module';
+import { LoadingTeamModule } from './loading-team/loading-team.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DistrictTalukaModule } from './district-taluka/district-taluka.module';
     }),
     ManageCpModule,
     DistrictTalukaModule,
+    LoadingTeamModule,
   ],
   controllers: [AppController],
   providers: [AppService],
