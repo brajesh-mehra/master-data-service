@@ -1,6 +1,6 @@
 import { IsString, IsOptional, IsNotEmpty, IsDefined } from 'class-validator';
 
-export class CreateCPDto {
+export class CreateCompanyDto {
     @IsDefined({ message: 'Name is required' })
     @IsNotEmpty({ message: 'Name cannot be empty' })
     @IsString({ message: 'Name must be a valid string' })

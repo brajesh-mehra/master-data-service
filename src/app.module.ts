@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import configuration from './config/configuration';
-import { ManageCpModule } from './manage-cp/manage-cp.module';
+import { ManageCompanyModule } from './manage-company/manage-company.module';
 import { DistrictTalukaModule } from './district-taluka/district-taluka.module';
 import { LoadingTeamModule } from './loading-team/loading-team.module';
 
@@ -22,7 +22,7 @@ import { LoadingTeamModule } from './loading-team/loading-team.module';
       }),
       inject: [ConfigService]
     }),
-    ManageCpModule,
+    ManageCompanyModule,
     DistrictTalukaModule,
     LoadingTeamModule,
   ],

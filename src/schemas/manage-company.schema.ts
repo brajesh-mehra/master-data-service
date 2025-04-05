@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
-export class ManageCP extends Document {
+export class ManageCompany extends Document {
   @Prop({ required: true, unique: true })
   name: string;
 
@@ -10,9 +10,9 @@ export class ManageCP extends Document {
   isActive: boolean;
 }
 
-const ManageCPSchema = SchemaFactory.createForClass(ManageCP);
+const ManageCompanySchema = SchemaFactory.createForClass(ManageCompany);
 
-ManageCPSchema.set('toJSON', {
+ManageCompanySchema.set('toJSON', {
   transform: function (doc, ret) {
       delete ret.isActive;
       delete ret.isDeleted;
@@ -23,4 +23,4 @@ ManageCPSchema.set('toJSON', {
   }
 });
 
-export { ManageCPSchema };
+export { ManageCompanySchema };
