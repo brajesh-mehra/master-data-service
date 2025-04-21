@@ -7,6 +7,7 @@ import configuration from './config/configuration';
 import { ManageCompanyModule } from './manage-company/manage-company.module';
 import { DistrictTalukaModule } from './district-taluka/district-taluka.module';
 import { LoadingTeamModule } from './loading-team/loading-team.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { LoadingTeamModule } from './loading-team/loading-team.module';
     ManageCompanyModule,
     DistrictTalukaModule,
     LoadingTeamModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
